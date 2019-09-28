@@ -2,7 +2,9 @@
 	Programm: gerador_classes.php
 	Objective: Generat all class for object orientation in PHP from archeve sql
 	Autor: Hélio Barbosa
-	Youtub channel: 
+	Youtub channel:
+	https://www.youtube.com/channel/UCOqRfHNtUZu8zMImLrU9YeQ?view_as=subscriber
+	
 	GitHub: https://github.com/helhoso/PHPCodeGenerator.git
 	linkedin: https://br.linkedin.com/in/helio-barbosa-32718082
 -->
