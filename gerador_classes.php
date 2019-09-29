@@ -1,12 +1,13 @@
 <!--
 	Programm: gerador_classes.php
-	Objective: Generat all class for object orientation in PHP from archeve sql
+	Objective: Generated all class for object orientation in PHP from archeve sql
 	Autor: Hélio Barbosa
-	Youtub channel:
-	https://www.youtube.com/channel/UCOqRfHNtUZu8zMImLrU9YeQ?view_as=subscriber
-	
+
 	GitHub: https://github.com/helhoso/PHPCodeGenerator.git
 	linkedin: https://br.linkedin.com/in/helio-barbosa-32718082
+	email: hflb01@gmail.com
+	youtube: https://www.youtube.com/user/1908HELIO
+
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -17,8 +18,8 @@
 <body>
 <table>
 	<form action="gerador_classes_gerar.php" method="post" enctype="multipart/form-data"> 
-		<input type="file" name="Arquivo" id="Arquivo"><br> 
-		<input type="submit" value="Enviar"> 
-		<input type="reset" value="Apagar"> 
+		<input type="file" name="Arquivo" id="Arquivo"></br> 
+		<input type="submit" value="Gerar Classes"> </br>
+		<input type="reset" value="Limpar Formulario"></br>
 	</form>
 </table>
