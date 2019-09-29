@@ -66,13 +66,11 @@
 		        {
 		        	$inicio = true  ;
 		        	$final  = false ; 
-		        	echo ("</br></br>");
 		        }
 		        if(strpos($line, " ENGINE=")!=0 && !$final)
 		        {
 		        	$inicio = false ;
 		        	$final  = true  ;
-		        	echo ("</br></br>");
 		        }
 		        if($inicio && !$final)
 		        {
@@ -360,9 +358,7 @@
 			        		$textClass  = $textClass . "       private $" . "$class_pro ;" .chr(10);
 			        		$arrayProp[ sizeof($arrayProp) ] = $class_pro ; 
 			        	}   
-			        	// echo ("$class_name </br>");
 			        }
-			        echo ("$textClass </br></br>") ;
 		        }
 		    }
 		    // Encerra o arquivo com todas as classes geradas

@@ -8,7 +8,7 @@
 <?php
 /*
 	Programm: gerador_classes.php
-	Objective: Generat all class for object orientation in PHP from archeve sql
+	Objective: Generated all class for object orientation in PHP from archeve sql
 	Autor: Hélio Barbosa
 
 	GitHub: https://github.com/helhoso/PHPCodeGenerator.git
@@ -16,12 +16,12 @@
 	email: hflb01@gmail.com
 	youtube: https://www.youtube.com/user/1908HELIO
 */
-	echo ("</br>Recebendo arquivo....") ;
+	echo ("</br>Gerando Classes PHP....</br>") ;
+	echo ("Recebendo arquivo....</br>") ;
 	$nome_temporario=$_FILES["Arquivo"]["tmp_name"];
 	$nome_real=$_FILES["Arquivo"]["name"];
 	copy($nome_temporario,"arq_sql/$nome_real");
 
-	echo ("</br></br>Gerando Classes PHP....") ;
 	include_once("gerador_gerar_classes.php")  ;
 	$NewGerar = New Gerar() ;
 	$NewGerar->setArquivoSQL($nome_temporario);
