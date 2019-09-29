@@ -4,6 +4,8 @@
 	Objective: Generated all class for object orientation in PHP from archeve sql
 	Autor: Hélio Barbosa
 	
+	http://solucaofinal.com
+
 	Todas as classes serão criadas em um unico arquivo
 	separe-as posteriormente
 	https://github.com/

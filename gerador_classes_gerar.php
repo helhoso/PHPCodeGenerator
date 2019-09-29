@@ -11,6 +11,8 @@
 	Objective: Generated all class for object orientation in PHP from archeve sql
 	Autor: Hélio Barbosa
 
+	http://solucaofinal.com
+
 	GitHub: https://github.com/helhoso/PHPCodeGenerator.git
 	linkedin: https://br.linkedin.com/in/helio-barbosa-32718082
 	email: hflb01@gmail.com
