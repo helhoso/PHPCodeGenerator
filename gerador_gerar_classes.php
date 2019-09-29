@@ -310,7 +310,7 @@
 
 				        $delete = "$" ."myDelete = 'delete from " . $class_name . " where " ;
 		        		$delete = $delete .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
-				        $textClass  = $textClass . "               $delete"  .chr(10)  ;
+				        $textClass  = $textClass . "               $delete ;"  .chr(10)  ;
 
 				        $textClass  = $textClass ."               $" ."ret_del=mysqli_query( $". "myCon , $"."delete);"  .chr(10) ;
 				        $textClass  = $textClass ."               $" ."afected=mysqli_affected_rows( $" . "myCon ) ;" .chr(10) ;
