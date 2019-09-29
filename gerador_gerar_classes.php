@@ -77,7 +77,8 @@
 		        	// Set Get dos atributos/propriedades
 		        	if( strpos($line,"PRIMARY KEY")!=0){
 		        		// entra aqui apos finalizar as declaracoes dos atributos
-		        		$textClass  = $textClass . "       private $" ."records_found ;" .chr(10) .chr(10) ;
+		        		$textClass  = $textClass . "       private $" ."records_found ;" .chr(10) ;
+		        		$textClass  = $textClass . "       private $" ."myCon ; // conexao com Banco de dados " .chr(10) .chr(10) ;
 
 		        		// __construct()
 		        		$textClass  = $textClass . "       function __construct() " . chr(10) . "       {" .chr(10) ;
@@ -138,7 +139,7 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[1] . " = ' . $" . "this->" .$arrayProp[1] . " ;" ;
 
-				        $textClass  = $textClass . "           include('myCon.php') // transformar em uma classe;". chr(10)  ;
+				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
@@ -185,7 +186,7 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           include('myCon.php') // transformar em uma classe;". chr(10)  ;
+				        $textClass  = $textClass . "           dataBaseAccess(); ". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
@@ -214,7 +215,7 @@
 				        $textClass  = $textClass . "               return $". "listaObjeto ;" . chr(10) ;
 				        $textClass  = $textClass . "           }" .chr(10) ;
 				        $textClass  = $textClass . "           $". "id= -1 ;" .chr(10) ;
-				        $textClass  = $textClass . "           include('myCon.php') // transformar em uma classe;". chr(10)  ;
+				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "_sql) ;" .chr(10)  ;
 
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
@@ -250,7 +251,7 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           include('myCon.php') // transformar em uma classe;". chr(10)  ;
+				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
@@ -298,7 +299,7 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           include('myCon.php') // transformar em uma classe;". chr(10)  ;
+				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
@@ -362,6 +363,17 @@
 		        }
 		    }
 		    // Encerra o arquivo com todas as classes geradas
+		    $textClass  = $textClass .
+		    "function dataBaseAccess() " .chr(10).
+		    "{" .chr(10).
+			"    error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED); " . chr(10).
+			"    // error_reporting(0);" .chr(10). 
+			"    date_default_timezone_set('America/Recife');" .chr(10).
+			"    // conexão com o servidor " .chr(10).
+			"    $"."this->myCon = mysqli_connect('localhost', 'userName', 'userPassword');" .chr(10).
+			"    return " .chr(10).
+			"}" .chr(10) ;
+
 		    $textClass  = $textClass . "?>" ;
 		    fclose($fh);
 		    fwrite( $fp,$textClass.chr(10).chr(13) ) ;
