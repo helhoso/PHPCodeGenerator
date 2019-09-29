@@ -97,7 +97,7 @@
 						// Numero de linhas da tabela 201
 		        		// Todos os set
 		        		$textClass  = $textClass . "       function getrecords_found() " . chr(10) . "       {" .chr(10) ;
-		        		$textClass  = $textClass . "           if($" . "this->records_found==null) ; " .chr(10) ;
+		        		$textClass  = $textClass . "           if($" . "this->records_found==null) " .chr(10) ;
 		        		$textClass  = $textClass . "           {" .chr(10) ;
 		        		$textClass  = $textClass . "               return 0 ;" .chr(10) ;
 		        		$textClass  = $textClass . "           }else{" .chr(10) ;
@@ -243,7 +243,7 @@
 				        // Alterar - 501 (129)
 				        $textClass  = $textClass . "       function alterar" .$class_name. "()".chr(10) . "       {" .chr(10) ;
 
-				        $textClass  = $textClass . "           $". "codigo = $". "this->codigo". chr(10)  ;
+				        $textClass  = $textClass . "           $". "codigo = $". "this->codigo ;". chr(10)  ;
 				        $select = "$" ."mySelect = 'select ";
 		        		for($x=0 ; $x <= sizeof($arrayProp)-2 ; $x++)
 		        		{
@@ -268,7 +268,7 @@
 		        		$y = sizeof($arrayProp)-1 ;
 		        		$update = $update .$arrayProp[ $y ] . "= $" . "this->" .$arrayProp[ $y ]. " where " ;
 		        		$update = $update .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
-				        $textClass  = $textClass . "               $update"  .chr(10)  ;
+				        $textClass  = $textClass . "               $update ;"  .chr(10)  ;
 
 
 				        $textClass  = $textClass ."               $" ."ret_upd=mysqli_query( $". "myCon , $"."update);"  .chr(10) ;
@@ -291,7 +291,7 @@
 				        // Excluir - 469
 				        $textClass  = $textClass . "       function excluir" .$class_name. "()".chr(10) . "       {" .chr(10) ;
 
-				        $textClass  = $textClass . "           $". "codigo = $". "this->codigo". chr(10)  ;
+				        $textClass  = $textClass . "           $". "codigo = $". "this->codigo ;". chr(10)  ;
 				        $select = "$" ."mySelect = 'select ";
 		        		for($x=0 ; $x <= sizeof($arrayProp)-2 ; $x++)
 		        		{
@@ -309,7 +309,7 @@
 
 
 				        $delete = "$" ."myDelete = 'delete from " . $class_name . " where " ;
-		        		$delete = $update .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
+		        		$delete = $delete .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
 				        $textClass  = $textClass . "               $delete"  .chr(10)  ;
 
 				        $textClass  = $textClass ."               $" ."ret_del=mysqli_query( $". "myCon , $"."delete);"  .chr(10) ;
