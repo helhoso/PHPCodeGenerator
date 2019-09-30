@@ -29,11 +29,11 @@
 		$this->arquivoSQL  = null; 
 		$this->arquivoOBJ  = null;
 		$this->FileGerated = "FileClasse" . Date("ymd") . time("hms") .".TXT" ;
-		$this->comentarios  = "/* ".chr(10)."Programm: gerador_classes.php" .chr(10). "Objective: Gerar classes em PHP oritenado a objeto a partir de um arquivo texto sql" .chr(10).
-		"Autor: Hélio Barbosa" .chr(10). "Todas as classes serão criadas em um unico arquivo separe-as posteriormente" .chr(10). 
-		"GitHub: https:/". "/github.com/helhoso/PHPCodeGenerator.git" .chr(10).
-		"linkedin: https://br.linkedin.com/in/helio-barbosa-32718082" .chr(10).
-		"email: hflb01@gmail.com" .chr(10). "youtube: https://www.youtube.com/user/1908HELIO" .chr(10). "*/" ;
+		$this->comentarios  = "/* ".chr(10)."   Programm: gerador_classes.php" .chr(10). "   Objective: Gerar classes em PHP oritenado a objeto a partir de um arquivo texto sql" .chr(10).
+		"   Autor: Hélio Barbosa" .chr(10). "   Todas as classes serão criadas em um unico arquivo separe-as posteriormente" .chr(10). 
+		"   GitHub: https:/". "/github.com/helhoso/PHPCodeGenerator.git" .chr(10).
+		"   linkedin: https://br.linkedin.com/in/helio-barbosa-32718082" .chr(10).
+		"   email: hflb01@gmail.com" .chr(10). "   youtube: https://www.youtube.com/user/1908HELIO" .chr(10). "*/" ;
       } 
 
       function __destruct() { 
@@ -54,8 +54,8 @@
 			unlink($this->FileGerated) ;
 		}
 
-		$textClass = $this->comentarios . chr(10);
-		$textClass = $textClass . "<?php" . chr(10) ;
+		$textClass = "<?php" . chr(10) ;
+    $textClass = $textClass . $this->comentarios . chr(10);
 		$fp        = fopen($this->FileGerated,"a");
       	$inicio    = false   ;
       	$final     = true    ;
@@ -81,6 +81,19 @@
 		        		// entra aqui apos finalizar as declaracoes dos atributos
 		        		$textClass  = $textClass . "       private $" ."records_found ;" .chr(10) ;
 		        		$textClass  = $textClass . "       private $" ."myCon ; // conexao com Banco de dados " .chr(10) .chr(10) ;
+
+
+                $textClass  = $textClass .
+                "    function dataBaseAccess() " .chr(10).
+                "    {" .chr(10).
+                "        error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED); " . chr(10).
+                "        // error_reporting(0);" .chr(10). 
+                "        date_default_timezone_set('America/Recife');" .chr(10).
+                "        // conexão com o servidor " .chr(10).
+                "        $"."this->myCon=mysqli_connect('localhost', 'userName', 'userPassword');".chr(10).
+                "        $"."db_selected = mysqli_select_db( $"."this->myCon , 'dataBaseName here' );" .chr(10). 
+                "        return ; " .chr(10).
+                "    }" .chr(10) ;
 
 		        		// __construct()
 		        		$textClass  = $textClass . "       function __construct() " . chr(10) . "       {" .chr(10) ;
@@ -141,13 +154,13 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[1] . " = ' . $" . "this->" .$arrayProp[1] . " ;" ;
 
-				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
+				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
-				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
-				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
-				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
+				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "mySelect) ;" .chr(10)  ;
+				        // $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
+				        $textClass  = $textClass . "           if( $". "ret )"  .chr(10). "           {" .chr(10) ;
 				        $textClass  = $textClass ."               // Ja cadastrado" .chr(10) ;
-				        $textClass  = $textClass ."               mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."               return -1 ; // ja cadastrado ".chr(10) ;
 				        $textClass  = $textClass ."           }else{" .chr(10) ;
 				        $textClass  = $textClass ."               // Incluir " .chr(10) ;
@@ -167,8 +180,8 @@
 		        		$y = sizeof($arrayProp)-1 ;
 		        		$insert = $insert ."$" ."this->". $arrayProp[ $y ] . ")' ; " ;
 				        $textClass  = $textClass ."               $insert" .chr(10) ;
-				        $textClass  = $textClass ."               $" . "ret = mysqli_query($" . "myCon , $". "myInsert) ;" .chr(10) ;
-				        $textClass  = $textClass ."               $" . "new_rec = mysqli_insert_id($" . "myCon) ;" .chr(10) ;
+				        $textClass  = $textClass ."               $" . "ret = mysqli_query($" . "this->myCon , $". "myInsert) ;" .chr(10) ;
+				        $textClass  = $textClass ."               $" . "new_rec = mysqli_insert_id($" . "this->myCon) ;" .chr(10) ;
 				        $textClass  = $textClass ."               return $" . "new_rec ; // se for 0 deu erro na inclusao" .chr(10) ;
 
 				        $textClass  = $textClass ."           }" .chr(10) ;
@@ -188,9 +201,9 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           dataBaseAccess(); ". chr(10)  ;
+				        $textClass  = $textClass . "           $"."this->dataBaseAccess(); ". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
-				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
+				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
 				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
 				        $textClass  = $textClass ."               $". "reg = mysqli_fetch_array($". "ret) ;" .chr(10) ;
@@ -198,11 +211,11 @@
 		        		{
 		        			$textClass  = $textClass ."               $". "this->".$arrayProp[$x]. "=$". "reg['" . $arrayProp[$x] ."'] ;" . chr(10);
 		        		}
-				        $textClass  = $textClass ."               mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass . "              $". "this->records_found=$". "numRows ;" .chr(10) ;
 				        $textClass  = $textClass ."               return true ; // ja cadastrado ".chr(10) ;
 				        $textClass  = $textClass ."           }else{" .chr(10) ;
-				        $textClass  = $textClass ."               mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."               return false ; " .chr(10) ;
 				        $textClass  = $textClass . "           }" .chr(10) ;
 				        $textClass  = $textClass . "       }" .chr(10) ;
@@ -217,8 +230,8 @@
 				        $textClass  = $textClass . "               return $". "listaObjeto ;" . chr(10) ;
 				        $textClass  = $textClass . "           }" .chr(10) ;
 				        $textClass  = $textClass . "           $". "id= -1 ;" .chr(10) ;
-				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
-				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "_sql) ;" .chr(10)  ;
+				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
+				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "_sql) ;" .chr(10)  ;
 
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
 				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
@@ -234,7 +247,7 @@
 				        $textClass  = $textClass . "                   $". "listaObjeto[$" . "id] = $". "new" . $class_name . " ;" .chr(10) ;
 				        $textClass  = $textClass . "                }" .chr(10) ;
 				        $textClass  = $textClass . "           } " .chr(10) ;
-				        $textClass  = $textClass . "           mysqli_close( $" . "myCon ) ;" .chr(10) ;
+				        $textClass  = $textClass . "           mysqli_close( $" . "this->myCon ) ;" .chr(10) ;
 				        $textClass  = $textClass . "           return $" . "listaObjeto ;" .chr(10) ;
 				        $textClass  = $textClass . "       }" .chr(10) ;
 
@@ -253,9 +266,9 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
+				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
-				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
+				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
 				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
 
@@ -271,19 +284,19 @@
 				        $textClass  = $textClass . "               $update ;"  .chr(10)  ;
 
 
-				        $textClass  = $textClass ."               $" ."ret_upd=mysqli_query( $". "myCon , $"."update);"  .chr(10) ;
+				        $textClass  = $textClass ."               $" ."ret_upd=mysqli_query( $". "this->myCon , $"."update);"  .chr(10) ;
 
 				        $textClass  = $textClass ."               if( $" ."ret_upd )" . chr(10) ;
 				        $textClass  = $textClass ."               {" . chr(10) ;
-				        $textClass  = $textClass ."                   mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."                   mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."                   return true ; // sucesso" . chr(10) ;
 				        $textClass  = $textClass ."               }else{ " . chr(10) ;
-				        $textClass  = $textClass ."                   mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."                   mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."                   return false ; // falha " . chr(10) ;
 				        $textClass  = $textClass ."               } " . chr(10) ;
 
 				        $textClass  = $textClass ."           }else{" .chr(10) ;
-				        $textClass  = $textClass ."               mysqli_close( $". "myCon );" .chr(10) ; 
+				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );" .chr(10) ; 
 				        $textClass  = $textClass ."               return false ; // falha na alteracao" .chr(10) ;
 				        $textClass  = $textClass ."           } " .chr(10) ;
 				        $textClass  = $textClass ."       } " .chr(10) ;
@@ -301,9 +314,9 @@
 		        		$select = $select .$arrayProp[ $y ] . " where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
-				        $textClass  = $textClass . "           dataBaseAccess() ;". chr(10)  ;
+				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
-				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."myCon , $" . "mySelect) ;" .chr(10)  ;
+				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "mySelect) ;" .chr(10)  ;
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
 				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
 
@@ -312,20 +325,20 @@
 		        		$delete = $delete .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
 				        $textClass  = $textClass . "               $delete ;"  .chr(10)  ;
 
-				        $textClass  = $textClass ."               $" ."ret_del=mysqli_query( $". "myCon , $"."delete);"  .chr(10) ;
-				        $textClass  = $textClass ."               $" ."afected=mysqli_affected_rows( $" . "myCon ) ;" .chr(10) ;
-				        $textClass  = $textClass ."               $" ."this->records_found = $" ."afected" ;
+				        $textClass  = $textClass ."               $" ."ret_del=mysqli_query( $". "this->myCon , $"."myDelete);"  .chr(10) ;
+				        $textClass  = $textClass ."               $" ."afected=mysqli_affected_rows( $" . "this->myCon ) ;" .chr(10) ;
+				        $textClass  = $textClass ."               $" ."this->records_found = $" ."afected ;" .chr(10) ;
 				        $textClass  = $textClass ."               if( $" ."afected!=0 )" . chr(10) ;
 				        $textClass  = $textClass ."               {" . chr(10) ;
-				        $textClass  = $textClass ."                   mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."                   mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."                   return true ; // sucesso" . chr(10) ;
 				        $textClass  = $textClass ."               }else{ " . chr(10) ;
-				        $textClass  = $textClass ."                   mysqli_close( $". "myCon );"  .chr(10) ;
+				        $textClass  = $textClass ."                   mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."                   return false ; // falha " . chr(10) ;
 				        $textClass  = $textClass ."               } " . chr(10) ;
 
 				        $textClass  = $textClass ."           }else{" .chr(10) ;
-				        $textClass  = $textClass ."               mysqli_close( $". "myCon );" .chr(10) ; 
+				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );" .chr(10) ; 
 				        $textClass  = $textClass ."               return false ; // falha na alteracao" .chr(10) ;
 				        $textClass  = $textClass ."           } " .chr(10) ;
 				        $textClass  = $textClass ."       } " .chr(10) ;
@@ -365,17 +378,6 @@
 		        }
 		    }
 		    // Encerra o arquivo com todas as classes geradas
-		    $textClass  = $textClass .
-		    "function dataBaseAccess() " .chr(10).
-		    "{" .chr(10).
-			"    error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED); " . chr(10).
-			"    // error_reporting(0);" .chr(10). 
-			"    date_default_timezone_set('America/Recife');" .chr(10).
-			"    // conexão com o servidor " .chr(10).
-			"    $"."this->myCon = mysqli_connect('localhost', 'userName', 'userPassword');" .chr(10).
-			"    return " .chr(10).
-			"}" .chr(10) ;
-
 		    $textClass  = $textClass . "?>" ;
 		    fclose($fh);
 		    fwrite( $fp,$textClass.chr(10).chr(13) ) ;
