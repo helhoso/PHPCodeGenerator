@@ -2,7 +2,7 @@
 PHP source code generator is an idea of make a framework that help us and minimize the process of write and repeat write some thing else.
 
   Programm name: gerador_classes.php, gerador_classes_gerar.php, gerador_gerar_classes.php
-	Objective: Generat all class for object orientation in PHP from archeve sql
+	Objective: Generat all class for object orientation in PHP from archive sql
 	Autor: Hélio Barbosa
 	Youtub channel:
 	https://www.youtube.com/channel/UCOqRfHNtUZu8zMImLrU9YeQ?view_as=subscriber
