@@ -151,7 +151,7 @@
 		        			$select = $select .$arrayProp[$x]. "," ;
 		        		}
 		        		$y = sizeof($arrayProp)-1 ;
-		        		$select = $select .$arrayProp[ $y ] . " where " ;
+		        		$select = $select .$arrayProp[ $y ] . " from ".$class_name." where " ;
 		        		$select = $select .$arrayProp[1] . " = ' . $" . "this->" .$arrayProp[1] . " ;" ;
 
 				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
@@ -198,7 +198,7 @@
 		        			$select = $select .$arrayProp[$x]. "," ;
 		        		}
 		        		$y = sizeof($arrayProp)-1 ;
-		        		$select = $select .$arrayProp[ $y ] . " where " ;
+		        		$select = $select .$arrayProp[ $y ] . " from ".$class_name." where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
 				        $textClass  = $textClass . "           $"."this->dataBaseAccess(); ". chr(10)  ;
@@ -263,7 +263,7 @@
 		        			$select = $select .$arrayProp[$x]. "," ;
 		        		}
 		        		$y = sizeof($arrayProp)-1 ;
-		        		$select = $select .$arrayProp[ $y ] . " where " ;
+		        		$select = $select .$arrayProp[ $y ] . " from ".$class_name." where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
 				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
@@ -279,7 +279,7 @@
 		        			$update = $update  ." set ". $arrayProp[$x]. "=$" . "this->". $arrayProp[$x] . " , " ;
 		        		}
 		        		$y = sizeof($arrayProp)-1 ;
-		        		$update = $update .$arrayProp[ $y ] . "= $" . "this->" .$arrayProp[ $y ]. " where " ;
+		        		$update = $update .$arrayProp[ $y ] . "= $" . "this->" .$arrayProp[ $y ]. "  from ".$class_name." where " ;
 		        		$update = $update .$arrayProp[0] . "=' . $" . "this->" .$arrayProp[0] ;
 				        $textClass  = $textClass . "               $update ;"  .chr(10)  ;
 
@@ -311,7 +311,7 @@
 		        			$select = $select .$arrayProp[$x]. "," ;
 		        		}
 		        		$y = sizeof($arrayProp)-1 ;
-		        		$select = $select .$arrayProp[ $y ] . " where " ;
+		        		$select = $select .$arrayProp[ $y ] . " from ".$class_name." where " ;
 		        		$select = $select .$arrayProp[0] . " = ' . $" . "this->" .$arrayProp[0] . " ;" ;
 
 				        $textClass  = $textClass . "           $"."this->dataBaseAccess() ;". chr(10)  ;
