@@ -7,7 +7,7 @@
 	$NewUsuario->setNome($nome);
 	$NewUsuario->setSenha($senha);
 	$NewUsuario->setCodigo_empresa(1);
-	echo $NewUsuario->getNome() . "</br>" . $NewUsuario->getSenha() . "</br>" . $NewUsuario->getCodigo_empresa() . "</br>";
+	// echo $NewUsuario->getNome() . "</br>" . $NewUsuario->getSenha() . "</br>" . $NewUsuario->getCodigo_empresa() . "</br>";
 	$NewCod = $NewUsuario->inserirUsuario() ;
 	echo $NewCod . "</br>";
 ?>
