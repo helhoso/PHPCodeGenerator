@@ -158,7 +158,7 @@
 				        $textClass  = $textClass . "           ". $select .chr(10)  ;
 				        $textClass  = $textClass . "           $". "ret = mysqli_query($" ."this->myCon , $" . "mySelect) ;" .chr(10)  ;
 				        // $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
-				        $textClass  = $textClass . "           if( $". "ret )"  .chr(10). "           {" .chr(10) ;
+				        $textClass  = $textClass . "           if( $". "ret->num_rows>0 )"  .chr(10). "           {" .chr(10) ;
 				        $textClass  = $textClass ."               // Ja cadastrado" .chr(10) ;
 				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass ."               return -1 ; // ja cadastrado ".chr(10) ;
