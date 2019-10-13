@@ -209,7 +209,7 @@
 				        $textClass  = $textClass ."               $". "reg = mysqli_fetch_array($". "ret) ;" .chr(10) ;
 		        		for($x=1 ; $x <= sizeof($arrayProp)-1 ; $x++)
 		        		{
-		        			$textClass  = $textClass ."               $". "this->".$arrayProp[$x]. "=$". "reg['" . $arrayProp[$x] ."'] ;" . chr(10);
+		        			$textClass  = $textClass ."               $". "this->".$arrayProp[$x]. "=$". "reg['" . strtolower($arrayProp[$x]) ."'] ;" . chr(10);
 		        		}
 				        $textClass  = $textClass ."               mysqli_close( $". "this->myCon );"  .chr(10) ;
 				        $textClass  = $textClass . "              $". "this->records_found=$". "numRows ;" .chr(10) ;
@@ -236,14 +236,14 @@
 				        $textClass  = $textClass . "           $". "numRows= mysqli_num_rows($" . "ret);  " .chr(10)  ;
 				        $textClass  = $textClass . "           if($". "numRows>0)"  .chr(10). "           {" .chr(10) ;
 				        $textClass  = $textClass . "               $". "this->records_found=$". "numRows ;" .chr(10) ;
-				        $textClass  = $textClass . "               $". "new". $class_name . " = new " . $class_name ." ;" .chr(10) ;
 				        $textClass  = $textClass . "               while ($". "row = mysqli_fetch_array($". "ret))" .chr(10). "               {" .chr(10) ;
+				        $textClass  = $textClass . "                  $". "new". $class_name . " = new " . $class_name ."() ;" .chr(10) ;
 
 		        		for($x=1 ; $x <= sizeof($arrayProp)-1 ; $x++)
 		        		{
-				        	$textClass  = $textClass . "                   $". "new" . $class_name ."->set" . $arrayProp[$x] ."($" ."row['" .$arrayProp[$x]. "']) ;" .chr(10) ;
+				        	$textClass  = $textClass . "                   $". "new" . $class_name ."->set" . $arrayProp[$x] ."($" ."row['" .strtolower($arrayProp[$x]). "']) ;" .chr(10) ;
 		        		}
-				        $textClass  = $textClass . "                   $". "id += $". "id ;" .chr(10) ;
+				        $textClass  = $textClass . "                   $". "id++ ;" .chr(10) ;
 				        $textClass  = $textClass . "                   $". "listaObjeto[$" . "id] = $". "new" . $class_name . " ;" .chr(10) ;
 				        $textClass  = $textClass . "                }" .chr(10) ;
 				        $textClass  = $textClass . "           } " .chr(10) ;
